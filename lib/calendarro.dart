@@ -213,11 +213,11 @@ class CalendarroState extends State<Calendarro> {
   bool isDateSelected(DateTime date) {
     switch (widget.selectionMode) {
       case SelectionMode.SINGLE:
-        return DateUtils.isSameDay(selectedSingleDate, date);
+        return dateUtils.DateUtils.isSameDay(selectedSingleDate, date);
         break;
       case SelectionMode.MULTI:
         final matchedSelectedDate = selectedDates.firstWhere((currentDate) =>
-            DateUtils.isSameDay(currentDate, date),
+            dateUtils.DateUtils.isSameDay(currentDate, date),
             orElse: () => null
         );
 
@@ -228,12 +228,12 @@ class CalendarroState extends State<Calendarro> {
           case 0:
             return false;
           case 1:
-            return DateUtils.isSameDay(selectedDates[0], date);
+            return dateUtils.DateUtils.isSameDay(selectedDates[0], date);
           default:
             var dateBetweenDatesRange = (date.isAfter(selectedDates[0])
                 && date.isBefore(selectedDates[1]));
-            return DateUtils.isSameDay(date, selectedDates[0])
-              || DateUtils.isSameDay(date, selectedDates[1])
+            return dateUtils.DateUtils.isSameDay(date, selectedDates[0])
+              || dateUtils.DateUtils.isSameDay(date, selectedDates[1])
               || dateBetweenDatesRange;
         }
         break;
@@ -243,7 +243,7 @@ class CalendarroState extends State<Calendarro> {
   void toggleDateSelection(DateTime date) {
     setState(() {
       for (var i = selectedDates.length - 1; i >= 0; i--) {
-        if (DateUtils.isSameDay(selectedDates[i], date)) {
+        if (dateUtils.DateUtils.isSameDay(selectedDates[i], date)) {
           selectedDates.removeAt(i);
           return;
         }
@@ -325,15 +325,15 @@ class CalendarroState extends State<Calendarro> {
     if (pagePosition == 0) {
       pageStartDate = widget.startDate;
       pageEndDate =
-          DateUtils.addDaysToDate(widget.startDate, 6 - widget.startDayOffset);
+          dateUtils.DateUtils.addDaysToDate(widget.startDate, 6 - widget.startDayOffset);
     } else if (pagePosition == pagesCount - 1) {
-      pageStartDate = DateUtils.addDaysToDate(
+      pageStartDate = dateUtils.DateUtils.addDaysToDate(
           widget.startDate, 7 * pagePosition - widget.startDayOffset);
       pageEndDate = widget.endDate;
     } else {
-      pageStartDate = DateUtils.addDaysToDate(
+      pageStartDate = dateUtils.DateUtils.addDaysToDate(
           widget.startDate, 7 * pagePosition - widget.startDayOffset);
-      pageEndDate = DateUtils.addDaysToDate(
+      pageEndDate = dateUtils.DateUtils.addDaysToDate(
           widget.startDate, 7 * pagePosition + 6 - widget.startDayOffset);
     }
 
@@ -364,7 +364,7 @@ class CalendarroState extends State<Calendarro> {
 
   void _setMultiSelectedDate(DateTime date) {
     final alreadyExistingDate = selectedDates.firstWhere((currentDate) =>
-        DateUtils.isSameDay(currentDate, date),
+        dateUtils.DateUtils.isSameDay(currentDate, date),
         orElse: () => null
     );
 
