@@ -1,5 +1,5 @@
 import 'package:calendarro/calendarro.dart';
-import 'package:calendarro/date_utils.dart';
+import 'package:calendarro/date_utils.dart' as dateUtils;
 import 'package:flutter/material.dart';
 
 class CalendarroDayItem extends StatelessWidget {
@@ -11,9 +11,9 @@ class CalendarroDayItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isWeekend = DateUtils.isWeekend(date);
+    bool isWeekend = dateUtils.DateUtils.isWeekend(date);
     var textColor = isWeekend ? Colors.grey : Colors.black;
-    bool isToday = DateUtils.isToday(date);
+    bool isToday = dateUtils.DateUtils.isToday(date);
     calendarroState = Calendarro.of(context);
 
     bool daySelected = calendarroState.isDateSelected(date);
